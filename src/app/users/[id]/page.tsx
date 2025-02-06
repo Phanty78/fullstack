@@ -1,15 +1,13 @@
 "use client";
 
+import UserProfile from "@/components/ui/userprofile";
 import { useParams } from "next/navigation";
 
-export default function UserProfile() {
+export default function UserPage() {
   const params = useParams<{ id: string }>();
   return (
     <div>
-      <h1 className="text-4xl mb-6">User Profile</h1>
-      <p>
-        User Id : <span className="text-blue-500 font-bold">{params.id}</span>
-      </p>
+      <UserProfile userId={params.id} />
     </div>
   );
 }
