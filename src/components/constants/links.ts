@@ -2,6 +2,7 @@ const INTERNAL_ROUTES: Record<string, string> = {
   HOME: "/",
   CONTACT: "/contact",
   ABOUT: "/about",
+  USERS: "/users",
 };
 
 const MENU = [
@@ -16,6 +17,11 @@ const MENU = [
   {
     label: "About",
     href: INTERNAL_ROUTES.ABOUT,
+  },
+  ,
+  {
+    label: "Users",
+    href: INTERNAL_ROUTES.USERS,
   },
 ];
 
