@@ -1,11 +1,8 @@
-import TUser from "@/components/types/index";
-import { useEffect, useState } from "react";
+import useUser from "@/components/hooks/useUser";
 import ClipLoader from "react-spinners/ClipLoader";
 
 export default function UserProfile({ userId }: { userId: string }) {
-  const [profile, setProfile] = useState<TUser>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { profile, error, isLoading } = useUser({ userId });
 
   function loadContent() {
     if (isLoading) {
@@ -22,33 +19,6 @@ export default function UserProfile({ userId }: { userId: string }) {
       );
     }
   }
-
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/users/${userId}`,
-        );
-
-        if (!response.ok) {
-          setError(response.statusText);
-          throw new Error(`failed to fetch data : ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        if (data) {
-          setProfile(data);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchUser();
-  }, [userId]);
 
   return (
     <>
