@@ -1,15 +1,17 @@
+import GetUsersNumber from "@/app/users-number-serverside/page";
 import Link from "next/link";
 
-export default function UsersList() {
-  const usersArray = [1, 2, 3, 4, 5];
+export default async function UsersList() {
+  const usersNumber = await GetUsersNumber();
+  console.log(typeof usersNumber);
 
-  return (
-    <ul>
-      {usersArray.map((user, index) => (
-        <li key={index}>
-          <Link href={`/users/${user}`}>User {user}</Link>
-        </li>
-      ))}
-    </ul>
-  );
+  const displayUserList = (usersNumber: number) => {
+    return Array.from({ length: usersNumber }, (_, i) => (
+      <li key={i}>
+        <Link href={`/users/${i + 1}`}>User {i + 1}</Link>
+      </li>
+    ));
+  };
+
+  return <ul>{displayUserList(usersNumber)}</ul>;
 }
